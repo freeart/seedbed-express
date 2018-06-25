@@ -5,7 +5,8 @@ const assert = require('assert'),
 	http = require('http'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
-	passport = require('passport')
+	passport = require('passport'),
+	promise = require('express-promise')
 
 module.exports = function () {
 	assert(!this.express, "field exists")
@@ -17,6 +18,7 @@ module.exports = function () {
 	this.express.use(bodyParser.urlencoded({ extended: true, parameterLimit: 5000 }));
 	this.express.use(bodyParser.json({ limit: '1mb' }));
 	this.express.use(methodOverride());
+	this.express.use(promise());
 	this.express.engine('html', require('ejs').renderFile);
 
 	this.express.set('view engine', 'ejs');
