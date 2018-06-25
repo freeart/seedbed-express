@@ -10,6 +10,7 @@ const assert = require('assert'),
 module.exports = function () {
 	assert(!this.express, "field exists")
 	this.express = express();
+	assert(!this.passport, "field exists")
 	this.passport = passport;
 	this.express.use(cors());
 	this.express.use(expressDomainMiddleware);
