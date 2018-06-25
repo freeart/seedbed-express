@@ -10,8 +10,10 @@ const assert = require('assert'),
 
 module.exports = function () {
 	assert(!this.express, "field exists")
-	this.express = express();
 	assert(!this.passport, "field exists")
+	assert(!this.server, "field exists")
+
+	this.express = express();
 	this.passport = passport;
 	this.express.use(cors());
 	this.express.use(expressDomainMiddleware);
@@ -25,8 +27,6 @@ module.exports = function () {
 	this.express.set('views', this.config.get("project.www"));
 	this.express.use(express.static(this.config.get("project.www")));
 
-
-	assert(!this.server, "field exists")
 	this.server = http.createServer(this.express);
 
 	this.on("ready", () => {
