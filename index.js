@@ -38,11 +38,11 @@ module.exports = function () {
 			next();
 		});
 
-		this.server.listen(this.config.get("project.port"), (err) => {
+		this.server.listen(this.config.get("project.express"), (err) => {
 			if (err) {
 				return console.error("server", err)
 			}
-			console.info("listening", this.config.get("project.port"));
+			console.info("listening", this.config.get("project.express"));
 		});
 	});
 
