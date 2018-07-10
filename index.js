@@ -23,6 +23,7 @@ module.exports = function () {
 
 	this.express.set('view engine', 'ejs');
 	this.express.set('views', this.config.get("project.www"));
+	this.express.use(this.config.get("project.basepath"), express.static(this.config.get("project.www")));	
 
 	this.server = http.createServer(this.express);
 
@@ -34,8 +35,6 @@ module.exports = function () {
 			}
 			next();
 		});
-
-		this.express.use(this.config.get("project.basepath"), express.static(this.config.get("project.www")));
 
 		this.server.listen(this.config.get("project.express"), (err) => {
 			if (err) {
