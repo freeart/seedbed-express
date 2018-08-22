@@ -7,6 +7,7 @@ const assert = require('assert'),
 	https = require('https'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
+	fileUpload = require('express-fileupload'),
 	passport = require('passport')
 
 module.exports = function () {
@@ -18,6 +19,9 @@ module.exports = function () {
 	this.express = express();
 	this.passport = passport;
 	this.express.use(cors());
+	this.express.use(fileUpload({
+		limits: { fileSize: 10 * 1024 * 1024 * 1024 }
+	}));
 	this.express.use(expressDomainMiddleware);
 	this.express.use(bodyParser.urlencoded({ extended: true, parameterLimit: 5000 }));
 	this.express.use(bodyParser.json({ limit: '1mb' }));
